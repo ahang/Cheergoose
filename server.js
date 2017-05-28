@@ -14,7 +14,13 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 //Setting up Handlebars
 var exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+
+var hbs = exphbs.create({
+    defaultLayout: "main",
+    partialsDir: ["views/partials/"]
+})
+
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 //Importing Routes

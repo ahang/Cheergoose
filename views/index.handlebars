@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="article-table">
+        <table class="tale table-condensed table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Link</th>
+                    <th>Type</th>
+                    <th>Snippet</th>
+                </tr>
+            </thead>
+    {{#each article}}
+            <tdbody>
+                <tr>
+                    <td>{{this.title}}</td>
+                    <td>{{this.link}}</td>
+                    <td>{{this.type}}</td>
+                    <td>{{this.teaser}}</td>
+                </tr>
+            </tdbody>
+    {{/each}}
+        </table>
+    </div>
+</div>

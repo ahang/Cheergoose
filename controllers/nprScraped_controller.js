@@ -43,4 +43,14 @@ router.get("/scrape", function(req, res) {
     res.send(`Scrape Completed`);
 });
 
+router.get("/all", function(req, res) {
+    db.nprNews.find({}, function(err, found) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("index", { article: found });
+        }
+    });
+});
+
 module.exports = router;

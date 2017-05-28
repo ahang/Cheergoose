@@ -1,10 +1,14 @@
 <div class="container">
+    <div class="col-md-12">
+        <h1>NPR -</h1>
+    </div>
+</div>
+<div class="container">
     <div class="article-table">
         <table class="tale table-condensed table-hover table-bordered">
             <thead>
                 <tr>
                     <th>Article</th>
-                    <th>Link</th>
                     <th>Type</th>
                     <th>Snippet</th>
                 </tr>
@@ -12,8 +16,7 @@
     {{#each article}}
             <tdbody>
                 <tr>
-                    <td>{{this.title}}</td>
-                    <td>{{this.link}}</td>
+                    <td><a href={{this.link}}>{{this.title}}</a></td>
                     <td>{{this.type}}</td>
                     <td>{{this.teaser}}</td>
                 </tr>

@@ -1,25 +1,14 @@
 <div class="container">
-
-</div>
-<div class="container">
     <div class="article-table">
-        <table class="tale table-condensed table-hover table-bordered">
+        <table class="table table-condensed table-hover table-bordered">
             <thead>
                 <tr>
-                    <th>Article</th>
                     <th>Type</th>
+                    <th>Article</th>
                     <th>Snippet</th>
                 </tr>
             </thead>
-    {{#each article}}
-            <tdbody>
-                <tr>
-                    <td><a href={{this.link}}>{{this.title}}</a></td>
-                    <td>{{this.type}}</td>
-                    <td>{{this.teaser}}</td>
-                </tr>
-            </tdbody>
-    {{/each}}
+            <tdbody class="nprResult"></tdbody>
         </table>
     </div>
 </div>

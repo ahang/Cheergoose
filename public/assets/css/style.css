@@ -1,3 +1,8 @@
 .header {
     text-align: center;
 }
+
+.dataGenre {
+    font-weight: bold;
+    width: 15%;
+}

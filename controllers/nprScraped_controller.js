@@ -44,11 +44,15 @@ router.get("/scrape", function(req, res) {
 });
 
 router.get("/", function(req, res) {
+    res.render("index");
+});
+
+router.get("/json", function(req, res) {
     db.nprNews.find({}, function(err, data) {
         if (err) {
             console.log(err);
         } else {
-            res.render("index", { article: data });
+            res.json(data);
         }
     });
 });

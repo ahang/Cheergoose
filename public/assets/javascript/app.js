@@ -16,7 +16,7 @@ function getData() {
                 </tr>`
             );
         var modals = (`
-            <div class="modal" id="#${data[i]._id}" role="dialog">
+            <div class="modal" id="${data[i]._id}" role="dialog">
                 <div class="modal-dialog">
 
                     <div class="modal-content">
@@ -33,7 +33,7 @@ function getData() {
                     </div>
                 </div>
             </div>
-            `)
+            `);
         $(".modals").append(modals);
         }
     });

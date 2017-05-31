@@ -29,7 +29,8 @@ router.get("/scrape", function(req, res) {
                     title: title,
                     link: link,
                     type: type,
-                    teaser: teaser
+                    teaser: teaser,
+                    note: ""
                 }, function(err, saved) {
                     if (err) {
                         console.log(err);

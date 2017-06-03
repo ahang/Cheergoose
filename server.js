@@ -2,6 +2,10 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongojs = require("mongojs");
+var mongoose = require("mongoose");
+var Article = require("./models/Article.js");
+var Comment = require("./models/Comment.js");
+
 
 var app = express();
 var PORT = 3000 || process.env.PORT;
@@ -11,6 +15,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+
+mongoose.connect("mongodb://localhost/npr");
+var db = mongoose.connection;
+
+db.on("error", function(error) {
+    console.log(`Moongose Error: ${error}`);
+});
+
+db.once("open", function() {
+    console.log("Mongoose connection active.");
+});
 
 //Setting up Handlebars
 var exphbs = require("express-handlebars");
@@ -24,9 +39,11 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 //Importing Routes
-var nprScraped = require("./controllers/nprScraped_controller.js");
+var npr = require("./controllers/npr_controller.js");
+var cheerio = require("./controllers/cheerio_controller.js");
 
-app.use("/", nprScraped);
+app.use("/", npr);
+app.use("/", cheerio);
 
 //Running the server
 app.listen(PORT, function() {

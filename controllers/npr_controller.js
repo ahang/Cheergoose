@@ -18,4 +18,15 @@ router.get("/json", function(req, res) {
     });
 });
 
+router.get("/articles/:id", function(req, res) {
+    Article.findOne({ "_id": req.params.id })
+    .populate("Comments").exec(function(err, doc) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(doc);
+        }
+    });
+});
+
 module.exports = router;

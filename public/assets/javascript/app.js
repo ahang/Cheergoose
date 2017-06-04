@@ -12,22 +12,11 @@ function getData() {
                     <td><a href="${data[i].link}">${data[i].title}</a></td>
                     <td> ${data[i].teaser}</td>
                     <td>
-                        <a class="btn btn-danger btn-lg btn-block note-modal" data-target="#${data[i]._id}" data-toggle="modal" type="button" role="button"><span class="glyphicon" aria-hidden="true"></span>View Notes</span></a>
+                        <a class="btn btn-danger btn-lg btn-block note-modal" data-target="#${data[i]._id}" data-id="${data[i]._id}" data-toggle="modal" type="button" role="button"><span class="glyphicon" aria-hidden="true"></span>View Comments</span></a>
                     </td>
                 </tr>`
             );
-        }
-    });
-}
-
-getData();
-
-$(document).on("click", ".note-modal", function() {
-    $.getJSON("/json", function(data) {
-        console.log("click");
-        for (var i = 0; i < data.length; i++) {
-            console.log("Begin");
-                var modals = (`
+            var modals = (`
                 <div class="modal" id="${data[i]._id}" role="dialog">
                     <div class="modal-dialog">
 
@@ -37,17 +26,32 @@ $(document).on("click", ".note-modal", function() {
                                 <h4 class="modal-title"><h4>${data[i].title}</h4></h4>
                             </div>
                             <div class="modal-body">
-                                <p></p>
+                                <p class="comments"></p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
-                </div>
-            `);
+                </div>`);
         $(".modals").append(modals);
         }
+    });
+}
 
-     });
+getData();
+
+$(document).on("click", ".note-modal", function() {
+    $(".comments").empty();
+    var thisId = $(this).attr("data-id");
+
+    $.ajax({
+        method: "GET",
+        url: `/articles/${thisId}`
+    })
+    .done(function(data) {
+        console.log(data);
+        $(".comments").append(`<textarea id="bodyinput" name="comment"></textarea>`);
+        $(".comments").append(`<button data-id="${data._id}" id="saveComment">Save Comment</button>`);
+    });
 });

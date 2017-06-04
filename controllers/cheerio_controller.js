@@ -13,7 +13,7 @@ router.get("/scrape", function(req, res) {
         $(".story-text").each(function(i, element) {
             var result = {}
             result.type = $(this).children("h2").text();
-            result.title = $(this).children("a").text();
+            result.title = $(this).find("h1").text();
             result.link = $(this).children("a").attr("href");
             result.teaser = $(this).children("a").eq(1).text();
 

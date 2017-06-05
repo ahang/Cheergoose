@@ -10,7 +10,7 @@ var ArticleSchema = new Schema({
     link: {
         type: String,
         required: true,
-        trime: true
+        trim: true
     },
     type: {
         type: String,
@@ -22,10 +22,11 @@ var ArticleSchema = new Schema({
         required: true,
         trim: true
     },
-    comment: {
+    comments: [
+    {
         type: Schema.Types.ObjectId,
         ref: "Comment"
-    }
+    }]
 });
 
 var Article = mongoose.model("Article", ArticleSchema);

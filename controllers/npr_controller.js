@@ -30,14 +30,14 @@ router.get("/article-comment/:id", function(req, res) {
 });
 
 router.post("/comment/:id", function(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     var newComment = new Comment(req.body);
 
     newComment.save(function(error, doc) {
         if (error) {
             console.log(error);
         } else {
-            Article.findOneAndUpdate({ "_id": req.params.id}, { "comment": doc._id })
+            Article.findOneAndUpdate({ "_id": req.params.id}, {$push:{ "comments": doc._id }})
             .exec(function(err, doc) {
                 if (err) {
                     console.log(err);

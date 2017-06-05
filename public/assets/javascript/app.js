@@ -4,7 +4,7 @@ $(document).ready(function() {
         // $(".nprResult").empty();
         $.getJSON("/json", function(data) {
             console.log(data);
-            for (var i = 0; i < 1; i++) {
+            for (var i = 0; i < 5; i++) {
                 console.log("looping..");
                 $(".table").prepend(`
                     <tr>
@@ -50,13 +50,13 @@ $(document).ready(function() {
         })
         .done(function(data) {
             console.log(data);
-            $(".add-comments").append(`<input id="comment-input" name="comment"></input>`);
+            $(".add-comments").append(`<input id="comment-input-${data._id}" name="comment"></input>`);
             $(".add-comments").append(`<button data-id="${data._id}" id="save-comment">Save Comment</button>`);
 
             if(data.comments) {
                 $(".view-comments").empty();
                 for(var i = 0; i < data.comments.length; i++) {
-                    $(".view-comments").val(`<p>${data.comments[i].comment}</p>`);
+                    $(".view-comments").append(`<p>${data.comments[i]}</p>`);
                 }
             }
         });
@@ -64,13 +64,14 @@ $(document).ready(function() {
 
     $(document).on("click", "#save-comment", function() {
         var thisId = $(this).attr("data-id");
+        debugger;
         console.log("This Id is " + thisId);
-        console.log("The Comment is " + $("#comment-input").val());
+        console.log("The Comment is " + $(`#comment-input-${thisId}`).val());
         $.ajax({
             method: "POST",
             url: `/comment/${thisId}`,
             data: {
-                comment: $("#comment-input").val()
+                comment: $("#comment-input-${thisId}").val()
             }
         }).done(function(data) {
             console.log(data);

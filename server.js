@@ -7,6 +7,7 @@ var Article = require("./models/Article.js");
 var Comment = require("./models/Comment.js");
 
 
+
 var app = express();
 var PORT = 3000 || process.env.PORT;
 
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/npr");
 var db = mongoose.connection;
 

@@ -18,13 +18,34 @@ router.get("/json", function(req, res) {
     });
 });
 
-router.get("/articles/:id", function(req, res) {
+router.get("/article-comment/:id", function(req, res) {
     Article.findOne({ "_id": req.params.id })
-    .populate("Comments").exec(function(err, doc) {
+    .populate("comment").exec(function(err, doc) {
         if (err) {
             console.log(err);
         } else {
             res.json(doc);
+        }
+    });
+});
+
+router.post("/comment/:id", function(req, res) {
+    console.log(req.body);
+    var newComment = new Comment(req.body);
+
+    newComment.save(function(error, doc) {
+        if (error) {
+            console.log(error);
+        } else {
+            Article.findOneAndUpdate({ "_id": req.params.id}, { "comment": doc._id })
+            .exec(function(err, doc) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Success!");
+                    res.send(doc);
+                }
+            });
         }
     });
 });

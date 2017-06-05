@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var CommentsSchema = new Schema({
+var CommentSchema = new Schema({
     comment: {
         type: String
     },
@@ -11,6 +11,6 @@ var CommentsSchema = new Schema({
     }
 });
 
-var Comments = mongoose.model("Comments", CommentsSchema);
+var Comment = mongoose.model("Comment", CommentSchema);
 
-module.exports = Comments;
+module.exports = Comment;

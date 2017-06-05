@@ -47,11 +47,26 @@ $(document).on("click", ".note-modal", function() {
 
     $.ajax({
         method: "GET",
-        url: `/articles/${thisId}`
+        url: `/article-comment/${thisId}`
     })
     .done(function(data) {
         console.log(data);
-        $(".comments").append(`<textarea id="bodyinput" name="comment"></textarea>`);
-        $(".comments").append(`<button data-id="${data._id}" id="saveComment">Save Comment</button>`);
+        $(".comments").append(`<input id="comment-input" name="comment"></input>`);
+        $(".comments").append(`<button data-id="${data._id}" id="save-comment">Save Comment</button>`);
     });
+});
+
+$(document).on("click", "#save-comment", function() {
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+        method: "POST",
+        url: `/comment/${thisId}`,
+        data: {
+            comment: $("#comment-input").val()
+        }
+    }).done(function(data) {
+        console.log(data);
+    });
+
+    $("#input").val("");
 });

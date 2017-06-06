@@ -16,6 +16,7 @@ router.get("/scrape", function(req, res) {
             result.title = $(this).find("h1").text();
             result.link = $(this).children("a").attr("href");
             result.teaser = $(this).children("a").eq(1).text();
+            result.image = $(this).parent().find("img").attr("src");
 
             var entry = new Article(result);
 

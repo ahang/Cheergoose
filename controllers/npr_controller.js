@@ -20,10 +20,11 @@ router.get("/json", function(req, res) {
 
 router.get("/article-comment/:id", function(req, res) {
     Article.findOne({ "_id": req.params.id })
-    .populate("comment").exec(function(err, doc) {
+    .populate("comments").exec(function(err, doc) {
         if (err) {
             console.log(err);
         } else {
+            console.log(doc);
             res.json(doc);
         }
     });

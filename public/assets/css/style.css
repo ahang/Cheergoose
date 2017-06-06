@@ -2,7 +2,29 @@
     text-align: center;
 }
 
+.title {
+    text-align: center;
+}
+
 .dataGenre {
     font-weight: bold;
     width: 15%;
+}
+
+.add-comments {
+    text-align: center;
+}
+
+.modal {
+    text-align: center;
+}
+
+.modal-dialog {
+    width: auto;
+    margin: 30px auto;
+    display: inline-block;
+}
+
+.snippet-view {
+    text-align: left;
 }

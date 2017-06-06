@@ -5,11 +5,17 @@ var ArticleSchema = new Schema({
     title: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     link: {
         type: String,
         required: true,
+        trim: true
+    },
+    image: {
+        type: String,
+        required: false,
         trim: true
     },
     type: {

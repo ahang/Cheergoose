@@ -6,6 +6,11 @@
     text-align: center;
 }
 
+.dataRow {
+    border-bottom: 2px solid black;
+    margin: 10px;
+}
+
 .dataGenre {
     font-weight: bold;
     width: 15%;
@@ -27,4 +32,13 @@
 
 .snippet-view {
     text-align: left;
+}
+
+.comment-description {
+    font-size: 15px;
+}
+
+.comment-box {
+    border: 1px solid grey;
+    margin: 10px;
 }

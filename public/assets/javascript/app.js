@@ -8,7 +8,7 @@ $(document).ready(function() {
             for (var i = 0; i < data.length; i++) {
                 console.log("looping..");
                 $(".table").append(`
-                    <tr>
+                    <tr class="dataRow">
                         <td class="dataGenre"> ${data[i].type} </td>
                         <td>${data[i].title}</td>
                         <td>
@@ -47,9 +47,17 @@ $(document).ready(function() {
             if (data.comments) {
                 $(".view-comments").append("<h4>Comments</h4>");
                 for(var i = 0; i < data.comments.length; i++) {
+                    var dateConvert = data.comments[i].date;
+                    // console.log(dateConvert);
+                    dateConvert = new Date();
+                    // console.log(dateConvert);
+                    var stringDate = dateConvert.toDateString();
+                    // console.log(dateConvert);
                     $(".view-comments").append(`
-                        <>${[i]}. ${data.comments[i].comment}</textarea>
-                        `);
+                        <div class="comment-box">
+                            Posted on ${stringDate}
+                            <p class="comment-description" data-id="${data.comments[i]._id}">${data.comments[i].comment}</p><button class="btn btn-danger remove-comment">X</span>
+                        </div>`);
                 }
             }
         });
@@ -75,6 +83,20 @@ $(document).ready(function() {
 
     $(document).on("click", ".scrape-btn", function() {
         $.get("/scrape");
+    });
+
+    $(document).on("click", ".remove-comment", function() {
+        // console.log("Click");
+        var thisId = $(this).parent();
+        console.log(thisId.find("p").attr("data-id"));
+        $.ajax({
+            type: "GET",
+            url: `/delete-comment/${thisId.find("p").attr("data-id")}`,
+            success: function(response) {
+                thisId.remove();
+            }
+        })
+
     })
 
     getData();

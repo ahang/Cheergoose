@@ -30,6 +30,10 @@ router.get("/article-comment/:id", function(req, res) {
     });
 });
 
+router.get("/delete-comment/:id", function(req, res) {
+    console.log(req.params.id);
+})
+
 router.post("/comment/:id", function(req, res) {
     //console.log(req.body);
     var newComment = new Comment(req.body);

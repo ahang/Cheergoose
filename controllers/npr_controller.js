@@ -32,6 +32,7 @@ router.get("/article-comment/:id", function(req, res) {
 router.post("/comment/:id", function(req, res) {
     //console.log(req.body);
     var newComment = new Comment(req.body);
+    console.log(`The new comment is ${newComment}`);
 
     newComment.save(function(error, doc) {
         if (error) {

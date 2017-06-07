@@ -4,10 +4,12 @@ var mongojs = require("mongojs");
 var Article = require("../models/Article.js");
 var Comment = require("../models/Comment.js");
 
+//Router to render the index page
 router.get("/", function(req, res) {
     res.render("index");
 });
 
+//Router to find all articles and send the data to the front end
 router.get("/json", function(req, res) {
     Article.find({}, function(err, data) {
         if (err) {
@@ -18,6 +20,7 @@ router.get("/json", function(req, res) {
     });
 });
 
+//Router to populate associated comments with the article
 router.get("/article-comment/:id", function(req, res) {
     Article.findOne({ "_id": req.params.id })
     .populate("comments").exec(function(err, doc) {
@@ -30,6 +33,7 @@ router.get("/article-comment/:id", function(req, res) {
     });
 });
 
+//Router to remove a comment from the Comment Collection and then pulling the comment id out of the Article comments array
 router.get("/delete-comment/:id", function(req, res) {
     var commentId = req.params.id;
     Comment.findOneAndRemove({ "_id": req.params.id }, function(err, response) {
@@ -42,10 +46,11 @@ router.get("/delete-comment/:id", function(req, res) {
     });
 });
 
+//Router to save a comment. First to add the comment to the comment collection and then add the associating id to the comments array in Article.
 router.post("/comment/:id", function(req, res) {
     //console.log(req.body);
     var newComment = new Comment(req.body);
-    console.log(`The new comment is ${newComment}`);
+    // console.log(`The new comment is ${newComment}`);
 
     newComment.save(function(error, doc) {
         if (error) {

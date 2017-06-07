@@ -1,8 +1,8 @@
-console.log(`App.js is loaded`);
+// console.log(`App.js is loaded`);
 $(document).ready(function() {
-    var title;
+    //Function to get the data and append each data to a table row
     function getData() {
-        // $(".nprResult").empty();
+        $(".dataRow").empty();
         $.getJSON("/json", function(data) {
             console.log(data);
             for (var i = 0; i < data.length; i++) {
@@ -12,14 +12,14 @@ $(document).ready(function() {
                         <td class="dataGenre"> ${data[i].type} </td>
                         <td>${data[i].title}</td>
                         <td>
-                            <a class="btn btn-danger btn-lg btn-block note-modal" data-target="#myModal" data-id="${data[i]._id}" data-toggle="modal" type="button" role="button"><span class="glyphicon" aria-hidden="true"></span>Read All About It</span></a>
+                            <a class="btn btn-danger btn-lg btn-block note-modal" data-target="#comment-modal" data-id="${data[i]._id}" data-toggle="modal" type="button" role="button"><span class="glyphicon" aria-hidden="true"></span>Read All About It</span></a>
                         </td>
                     </tr>`
                 );
             }
         });
     }
-
+    //Added event listener to append the article information and data onto a specific modal by grabbing the data-id as an attr.
     $(document).on("click", ".note-modal", function() {
         emptyModal();
         var thisId = $(this).attr("data-id");
@@ -43,7 +43,7 @@ $(document).ready(function() {
 
             // console.log(`The data comments is ${data.comments}`);
             // console.log(`These are the data sets available in data - ${data}`);
-
+            //If there are comments append all the comments and the date it was posted.
             if (data.comments) {
                 $(".view-comments").append("<h4>Comments</h4>");
                 for(var i = 0; i < data.comments.length; i++) {
@@ -63,6 +63,7 @@ $(document).ready(function() {
         });
     });
 
+    //Added event listener when someone clicks on save comment to make an AJAX call and post the data
     $(document).on("click", "#save-comment", function() {
         var thisId = $(this).attr("data-id");
         // console.log("This Id is " + thisId);
@@ -76,15 +77,15 @@ $(document).ready(function() {
             }
         }).done(function(data) {
             $("#comment-input").val("");
-            console.log(data);
         });
 
     });
-
+    //Added event listener for scrape-button to scrape npr if clicked on
     $(document).on("click", ".scrape-btn", function() {
         window.location.href = "/scrape";
     });
 
+    //added event listener to remove a specific comment
     $(document).on("click", ".remove-comment", function() {
         // console.log("Click");
         var thisId = $(this).parent();

@@ -9,12 +9,14 @@ var Comment = require("./models/Comment.js");
 var app = express();
 var PORT = 3000 || process.env.PORT;
 
+//Static public
 app.use(express.static(process.cwd() + "/public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+//Mongoose stuff and establishing connection
 mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/npr");
 var db = mongoose.connection;

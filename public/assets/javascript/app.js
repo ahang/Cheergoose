@@ -7,7 +7,7 @@ $(document).ready(function() {
             console.log(data);
             for (var i = 0; i < data.length; i++) {
                 console.log("looping..");
-                $(".table").append(`
+                $(".table").prepend(`
                     <tr class="dataRow">
                         <td class="dataGenre"> ${data[i].type} </td>
                         <td>${data[i].title}</td>
@@ -82,13 +82,13 @@ $(document).ready(function() {
     });
 
     $(document).on("click", ".scrape-btn", function() {
-        $.get("/scrape");
+        window.location.href = "/scrape";
     });
 
     $(document).on("click", ".remove-comment", function() {
         // console.log("Click");
         var thisId = $(this).parent();
-        console.log(thisId.find("p").attr("data-id"));
+        console.log("Comment ID is " + thisId.find("p").attr("data-id"));
         $.ajax({
             type: "GET",
             url: `/delete-comment/${thisId.find("p").attr("data-id")}`,

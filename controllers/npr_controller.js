@@ -31,8 +31,16 @@ router.get("/article-comment/:id", function(req, res) {
 });
 
 router.get("/delete-comment/:id", function(req, res) {
-    console.log(req.params.id);
-})
+    var commentId = req.params.id;
+    Comment.findOneAndRemove({ "_id": req.params.id }, function(err, response) {
+        if (err) throw err;
+        Article.update({ "comments": req.params.id }, {$pull: {"comments": req.params.id }})
+        .exec(function(err, doc) {
+            if (err) throw err;
+            res.json(doc);
+        })
+    });
+});
 
 router.post("/comment/:id", function(req, res) {
     //console.log(req.body);

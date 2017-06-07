@@ -7,6 +7,7 @@ var Article = require("../models/Article.js");
 var Comment = require("../models/Comment.js");
 
 router.get("/scrape", function(req, res) {
+    console.log("starting scrape");
     request("http://www.npr.org/", function(err, response, html) {
         var $ = cheerio.load(html);
 
@@ -31,7 +32,7 @@ router.get("/scrape", function(req, res) {
             }
         });
     });
-    res.send(`Scrape Completed`);
+    res.render("index");
 });
 
 module.exports = router;

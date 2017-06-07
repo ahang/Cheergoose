@@ -6,8 +6,6 @@ var mongoose = require("mongoose");
 var Article = require("./models/Article.js");
 var Comment = require("./models/Comment.js");
 
-
-
 var app = express();
 var PORT = 3000 || process.env.PORT;
 

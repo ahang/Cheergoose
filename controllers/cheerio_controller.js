@@ -20,18 +20,27 @@ router.get("/scrape", function(req, res) {
             result.link = $(this).children("a").attr("href");
             result.teaser = $(this).children("a").eq(1).text();
             result.image = $(this).parent().find("img").attr("src");
-            //Inserts a new entry in Article collection
-            var entry = new Article(result);
-            //If the title and link is valid insert the entry.
-            if (result.title && result.link) {
-                entry.save(function(err, doc) {
-                    if (err.code === 11000) {
-                        console.log(err);
-                    } else {
-                        console.log(doc);
-                    }
-                });
-            }
+            // console.log("The title is..." + result.title);
+            Article.findOne({ "title": result.title}, function(err, response) {
+            	console.log("The response is....." + response);
+            	if (response === null) {
+            		//Inserts a new entry in Article collection
+		            var entry = new Article(result);
+		            //If the title and link is valid insert the entry.
+		            if (result.title && result.link) {
+		                entry.save(function(err, doc) {
+		                    if (err) {
+		                        console.log(err);
+		                    } else {
+		                        console.log(doc);
+		                    }
+		                });
+		            }
+            	} else {
+            		console.log("Duplicate entry found");
+            	}
+            });
+
         });
     });
     //redirect back to the index page

@@ -25,7 +25,7 @@ router.get("/scrape", function(req, res) {
             //If the title and link is valid insert the entry.
             if (result.title && result.link) {
                 entry.save(function(err, doc) {
-                    if (err) {
+                    if (err.code === 11000) {
                         console.log(err);
                     } else {
                         console.log(doc);

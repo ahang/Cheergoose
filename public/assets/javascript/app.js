@@ -83,6 +83,7 @@ $(document).ready(function() {
     //Added event listener for scrape-button to scrape npr if clicked on
     $(document).on("click", ".scrape-btn", function() {
         window.location.href = "/scrape";
+        getData();
     });
 
     //added event listener to remove a specific comment
@@ -102,7 +103,7 @@ $(document).ready(function() {
 
     getData();
 });
-
+//empty modal functions on each load to prevent data duplication
 function emptyModal() {
     $(".add-comments").empty();
     $(".view-comments").empty();

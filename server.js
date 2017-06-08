@@ -17,8 +17,10 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 //Mongoose stuff and establishing connection
+var uristring = process.env.MONGODB_URI || "mongodb://localhost/npr";
+
 mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(uristring);
 var db = mongoose.connection;
 
 db.on("error", function(error) {

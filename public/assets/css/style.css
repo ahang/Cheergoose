@@ -11,9 +11,17 @@
     margin: 10px;
 }
 
+.dataTitle {
+    text-align: center;
+}
+
 .dataGenre {
     font-weight: bold;
     width: 15%;
+}
+
+.snippet-text {
+    text-align: center;
 }
 
 .add-comments {
@@ -41,4 +49,8 @@
 .comment-box {
     border: 1px solid grey;
     margin: 10px;
+}
+
+.footer {
+    text-align: center;
 }

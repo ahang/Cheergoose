@@ -10,7 +10,7 @@ $(document).ready(function() {
                 $(".table").prepend(`
                     <tr class="dataRow">
                         <td class="dataGenre"> ${data[i].type} </td>
-                        <td>${data[i].title}</td>
+                        <td class="dataTitle">${data[i].title}</td>
                         <td>
                             <a class="btn btn-danger btn-lg btn-block note-modal" data-target="#comment-modal" data-id="${data[i]._id}" data-toggle="modal" type="button" role="button"><span class="glyphicon" aria-hidden="true"></span>Read All About It</span></a>
                         </td>
@@ -36,7 +36,7 @@ $(document).ready(function() {
             } else {
                 $(".image-view").empty();
             }
-            $(".snippet-view").append(data.teaser);
+            $(".snippet-view").append(`<p class="snippet-text">${data.teaser}</p>`);
             $(".snippet-view").append(`<p><a href="${data.link}">Read more about it</a></p>`);
             $(".add-comments").append(`<input id="comment-input" name="comment" placeholder="Insert a Comment"></input>`);
             $(".add-comments").append(`<button data-id="${data._id}" id="save-comment">Save Comment</button>`);
@@ -87,8 +87,8 @@ $(document).ready(function() {
             method: "GET",
             url: `/scrape`
         }).done(function(data) {
-            getData();
-        })
+            window.location.reload(true);
+        });
     });
 
     //added event listener to remove a specific comment

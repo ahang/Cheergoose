@@ -20,6 +20,29 @@ router.get("/json", function(req, res) {
     });
 });
 
+//Router to find all comments
+router.get("/comments", function(req, res) {
+    Comment.find({}, function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(data);
+        }
+    })
+})
+
+//Router to show Articles & Linked comments
+router.get("/article-comments", function(req, res) {
+    Article.find({}).populate("comments")
+    .exec(function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(data);
+        }
+    })
+});
+
 //Router to populate associated comments with the article
 router.get("/article-comment/:id", function(req, res) {
     Article.findOne({ "_id": req.params.id })

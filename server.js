@@ -17,7 +17,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 //Mongoose stuff and establishing connection
-var uristring = process.env.MONGOLAB_URI || "mongodb://localhost/npr";
+var uristring = process.env.MONGODB_URI || "mongodb://localhost/npr";
 
 mongoose.Promise = Promise;
 mongoose.connect(uristring);

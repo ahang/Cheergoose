@@ -7,7 +7,7 @@ var Article = require("./models/Article.js");
 var Comment = require("./models/Comment.js");
 
 var app = express();
-var PORT = 3000 || process.env.PORT;
+var PORT = process.env.PORT || 3000;
 
 //Static public
 app.use(express.static(process.cwd() + "/public"));

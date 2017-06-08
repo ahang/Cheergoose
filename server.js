@@ -18,7 +18,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 //Mongoose stuff and establishing connection
 mongoose.Promise = Promise;
-mongoose.connect(" mongodb://heroku_93wjrvgf:s0j68ttg3snefhlkre1iocc3uh@ds115712.mlab.com:15712/heroku_93wjrvgf");
+mongoose.connect("mongodb://heroku_w7kh9llz:pdqvotccqfar2knfnbon85oeiv@ds115712.mlab.com:15712/heroku_w7kh9llzf");
 var db = mongoose.connection;
 
 db.on("error", function(error) {

@@ -1,5 +1,5 @@
 {
-  "name": "cheergoose",
+  "name": "npr-chatter",
   "version": "1.0.0",
   "description": "Flexing my Mongoose and Cheerio muscle to scrape news from another site",
   "main": "server.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahang/Cheergoose.git"
+    "url": "git+https://github.com/ahang/npr-chatter.git"
   },
   "keywords": [
     "Cheerio",
@@ -17,9 +17,9 @@
   "author": "Andy H",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ahang/Cheergoose/issues"
+    "url": "https://github.com/ahang/npr-chatter/issues"
   },
-  "homepage": "https://github.com/ahang/Cheergoose#readme",
+  "homepage": "https://github.com/ahang/npr-chatter#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
     "cheerio": "^0.22.0",

@@ -4,9 +4,9 @@ $(document).ready(function() {
     function getData() {
         $(".dataRow").empty();
         $.getJSON("/json", function(data) {
-            console.log(data);
+            // console.log(data);
             for (var i = 0; i < data.length; i++) {
-                console.log("looping..");
+                // console.log("looping..");
                 $(".table").prepend(`
                     <tr class="dataRow">
                         <td class="dataGenre"> ${data[i].type} </td>
@@ -29,7 +29,7 @@ $(document).ready(function() {
             url: `/article-comment/${thisId}`
         })
         .done(function(data) {
-            console.log(data);
+            // console.log(data);
             $(".title").append(data.title);
             if (data.image) {
                 $(".image-view").append(`<img src="${data.image}" class-"img img-responsive">`);
@@ -77,20 +77,25 @@ $(document).ready(function() {
             }
         }).done(function(data) {
             $("#comment-input").val("");
+            $("#comment-modal").modal("toggle");
         });
 
     });
     //Added event listener for scrape-button to scrape npr if clicked on
     $(document).on("click", ".scrape-btn", function() {
-        window.location.href = "/scrape";
-        getData();
+        $.ajax({
+            method: "GET",
+            url: `/scrape`
+        }).done(function(data) {
+            getData();
+        })
     });
 
     //added event listener to remove a specific comment
     $(document).on("click", ".remove-comment", function() {
         // console.log("Click");
         var thisId = $(this).parent();
-        console.log("Comment ID is " + thisId.find("p").attr("data-id"));
+        // console.log("Comment ID is " + thisId.find("p").attr("data-id"));
         $.ajax({
             type: "GET",
             url: `/delete-comment/${thisId.find("p").attr("data-id")}`,

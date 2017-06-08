@@ -8,7 +8,7 @@ var Comment = require("../models/Comment.js");
 
 //Router to scrape for data
 router.get("/scrape", function(req, res) {
-    console.log("starting scrape");
+    // console.log("starting scrape");
     request("http://www.npr.org/", function(err, response, html) {
         var $ = cheerio.load(html);
 
